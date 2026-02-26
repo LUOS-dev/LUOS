@@ -1,0 +1,482 @@
+/* src/components/Navbar.css */
+
+/* Importar las fuentes (opcional - si no las tienes en global.css) */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Sen:wght@400;500;600;700;800&display=swap');
+
+/* Variables locales */
+:root {
+  --font-anton: 'anton', sans-serif;
+  --font-sen: 'Sen', sans-serif;
+  --color-primary: #2563eb;
+  --color-secondary: #9333ea;
+  --color-dark: #1e293b;
+  --color-light: #f8fafc;
+  --color-gray: #475569;
+  --color-gray-light: #64748b;
+}
+
+/* Container principal */
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-sen); /* Aplicar Sen como base */
+}
+
+.navbar-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .navbar-content {
+    padding: 0 1.5rem;
+  }
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .navbar-inner {
+    height: 4rem;
+  }
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navbar-logo-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .navbar-logo-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.navbar-logo-text {
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .navbar-logo-text {
+    font-size: 1.25rem;
+  }
+}
+
+/* NOMBRE DEL LOGO CON FUENTE ATOM */
+.navbar-logo-name {
+  font-family: var(--font-anton); /* Aplicar Atom al logo */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .navbar-logo-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+}
+
+/* Desktop Menu */
+.navbar-menu-desktop {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .navbar-menu-desktop {
+    display: flex;
+  }
+}
+
+/* Dropdown */
+.navbar-dropdown {
+  position: relative;
+}
+
+/* TEXTO DEL DROPDOWN CON SEN */
+.navbar-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--color-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  font-family: var(--font-sen);
+  font-size: 1rem;
+  font-weight: 600; /* Sen semibold */
+}
+
+.navbar-dropdown-trigger:hover {
+  color: var(--color-primary);
+}
+
+.nav-chevron {
+  width: 1rem;
+  height: 1rem;
+}
+
+.navbar-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  width: 20rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: var(--font-sen); /* Aplicar Sen al dropdown */
+}
+
+.navbar-dropdown-content {
+  padding: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.navbar-service-item {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-service-item:hover {
+  background-color: var(--color-light);
+}
+
+.navbar-service-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.navbar-service-icon {
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+  margin-top: 0.125rem;
+}
+
+.navbar-service-item:hover .navbar-service-icon {
+  color: var(--color-secondary);
+}
+
+.nav-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* TÍTULOS DE SERVICIOS CON anton */
+.navbar-service-title {
+  font-family: var(--font-anton); /* Anton para títulos de servicios */
+  font-weight: 600;
+  color: var(--color-dark);
+  transition: color 0.2s ease;
+  font-size: 0.95rem;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.navbar-service-item:hover .navbar-service-title {
+  color: var(--color-primary);
+}
+
+/* DESCRIPCIONES CON SEN */
+.navbar-service-description {
+  font-family: var(--font-sen);
+  font-size: 0.875rem;
+  color: var(--color-gray-light);
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Menu Items - TODOS CON SEN */
+.navbar-menu-item {
+  color: var(--color-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sen);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0;
+}
+
+.navbar-menu-item:hover {
+  color: var(--color-primary);
+}
+
+/* Actions */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* BOTÓN CTA CON SEN */
+.navbar-cta-button {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-sen);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: none;
+  letter-spacing: 0.01em;
+}
+
+@media (min-width: 768px) {
+  .navbar-cta-button {
+    display: flex;
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+.navbar-cta-button:hover {
+  background: linear-gradient( #1e293b);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Mobile Toggle */
+.navbar-mobile-toggle {
+  display: block;
+  padding: 0.5rem;
+  color: var(--color-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-family: var(--font-sen);
+}
+
+@media (min-width: 768px) {
+  .navbar-mobile-toggle {
+    display: none;
+  }
+}
+
+.navbar-mobile-toggle:hover {
+  color: var(--color-primary);
+}
+
+.nav-icon-mobile {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Mobile Menu */
+.navbar-mobile-menu {
+  display: block;
+  background-color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: var(--font-sen);
+}
+
+@media (min-width: 768px) {
+  .navbar-mobile-menu {
+    display: none;
+  }
+}
+
+.navbar-mobile-content {
+  padding: 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .navbar-mobile-content {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* TEXTO MOBILE CON SEN */
+.navbar-mobile-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  color: var(--color-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  font-family: var(--font-sen);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.navbar-mobile-dropdown-trigger:hover {
+  color: var(--color-primary);
+}
+
+.navbar-mobile-services {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1rem;
+}
+
+/* TÍTULOS MOBILE CON ATOM */
+.navbar-mobile-service-item {
+  padding: 0.5rem;
+  font-family: var(--font-anton); /* anton para títulos en mobile */
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-gray-light);
+  transition: color 0.2s ease;
+  cursor: pointer;
+  letter-spacing: -0.01em;
+}
+
+.navbar-mobile-service-item:hover {
+  color: var(--color-primary);
+}
+
+.navbar-mobile-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: var(--color-gray);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  font-family: var(--font-sen);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.navbar-mobile-menu-item:hover {
+  color: var(--color-primary);
+}
+
+.navbar-mobile-cta {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.navbar-cta-button-mobile {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 0.75rem;
+  font-family: var(--font-sen);
+  font-weight: 600;
+}
+
+/* Overlay */
+.navbar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  cursor: pointer;
+}
+
+/* Dark mode support */
+.dark .navbar-container {
+  background-color: rgba(2, 6, 23, 0.95);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .navbar-logo-name {
+  color: #f8fafc;
+}
+
+.dark .navbar-dropdown-trigger,
+.dark .navbar-menu-item,
+.dark .navbar-mobile-toggle,
+.dark .navbar-mobile-dropdown-trigger,
+.dark .navbar-mobile-menu-item {
+  color: #cbd5e1;
+}
+
+.dark .navbar-dropdown-trigger:hover,
+.dark .navbar-menu-item:hover,
+.dark .navbar-mobile-toggle:hover,
+.dark .navbar-mobile-dropdown-trigger:hover,
+.dark .navbar-mobile-menu-item:hover {
+  color: #60a5fa;
+}
+
+.dark .navbar-dropdown-menu,
+.dark .navbar-mobile-menu {
+  background-color: #0f172a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .navbar-service-item:hover {
+  background-color: #1e293b;
+}
+
+.dark .navbar-service-title {
+  color: #f8fafc;
+}
+
+.dark .navbar-service-item:hover .navbar-service-title {
+  color: #60a5fa;
+}
+
+.dark .navbar-service-description,
+.dark .navbar-mobile-service-item {
+  color: #94a3b8;
+}
+
+.dark .navbar-mobile-service-item:hover {
+  color: #60a5fa;
+}
+
+.dark .navbar-mobile-cta {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}

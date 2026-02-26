@@ -1,0 +1,77 @@
+.cf-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.4rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
+.cf-title {
+  color: #1D293D;
+  font-size: 1.45rem;
+  /*font-weight: 600;*/
+  margin-bottom: 0.5rem;
+}
+
+.cf-description {
+  color: #6B7280;
+  font-size: 0.830rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.cf-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cf-input, .cf-textarea {
+  width: 100%;
+  background-color: #F3F4F6;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  padding: 0.35rem 1rem;
+  font-size: 0.9rem;
+  color: #1D293D;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.cf-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.cf-input:focus,
+.cf-textarea:focus {
+  outline: none;
+  border-color: #8B5CF6;
+  background-color: #ffffff;
+}
+
+.cf-input::placeholder,
+.cf-textarea::placeholder {
+  color: #9CA3AF;
+}
+
+.cf-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #8B5CF6;
+  color: white;
+  font-size: 0.9rem;
+  /*font-weight: 600;*/
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.cf-button:hover {
+  opacity: 0.95;
+  background: #1D293D;
+  transform: translateY(-2px);
+}

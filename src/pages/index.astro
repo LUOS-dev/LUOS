@@ -1,0 +1,28 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+//import { GeometricEagle } from '../components/GeometricEagle';
+import InnovationSection from '../components/InnovationSection';
+import StartSection from '../components/StartSection';
+import { InventoryPromoSection } from "../components//promotion/PromoSection";
+import Footer from '../components/Footer';
+import SecondPart from '../components/secondpart';
+import secondimg from '../assets/public/secondimg.png';
+import HubPage from '../components/HubPage';
+import { Timeline } from '../components/TimeLine';
+import '../styles/global.css';
+---
+
+<Layout title="LUOS - Inicio">
+  <Navbar client:load />
+  <StartSection client:load />
+  <InnovationSection client:load />
+  <HubPage client:load />
+  {/*<InventoryPromoSection client:load />*/}
+  <SecondPart imageSrc={secondimg.src}/>
+  <Timeline client:load />
+  
+
+  <Footer client:visible />
+</Layout>

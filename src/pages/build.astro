@@ -1,0 +1,16 @@
+---
+// src/pages/build.astro
+
+// 1. Importas tu Layout (para que se vea el Navbar y el Footer igual que en el inicio)
+import Layout from '../layouts/Layout.astro'; 
+import Navbar from '../components/Navbar';
+import AppBuild from '../components/AppBuild';
+import Footer from '../components/Footer';
+import '../styles/global.css';
+---
+
+<Layout title="Build Page">
+  <Navbar client:load />
+  <AppBuild client:load />
+  <Footer client:visible />
+</Layout>

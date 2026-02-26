@@ -1,0 +1,16 @@
+---
+// src/pages/empower.astro
+
+// 1. Importas tu Layout (para que se vea el Navbar y el Footer igual que en el inicio)
+import Layout from '../layouts/Layout.astro'; 
+import Navbar from '../components/Navbar';
+import AppEmpower from '../components/AppEmpower';
+import Footer from '../components/Footer';
+import '../styles/global.css';
+---
+
+<Layout title="Empower Page">
+  <Navbar client:load />
+  <AppEmpower client:load />
+  <Footer client:load />
+</Layout>

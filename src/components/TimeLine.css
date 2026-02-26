@@ -1,0 +1,227 @@
+.timeline-section {
+  width: 100%;
+  padding: 5rem 1.5rem; /* py-20 px-6 */
+  background: linear-gradient(to bottom, #ffffff, #ffffff); /* bg-gradient-to-b from-gray-50 to-white */
+}
+
+.timeline-container {
+  max-width: 80rem; /* max-w-7xl */
+  margin: 0 auto; /* mx-auto */
+}
+
+.timeline-header {
+  text-align: center;
+  margin-bottom: 4rem; /* mb-16 */
+}
+
+.timeline-title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 700; /* font-bold */
+  color: #111827; /* text-gray-900 */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+@media (min-width: 768px) {
+  .timeline-title {
+    font-size: 3rem; /* md:text-5xl */
+  }
+}
+
+.timeline-subtitle {
+  font-size: 1.25rem; /* text-xl */
+  color: #4b5563; /* text-gray-600 */
+}
+
+.timeline-relative-wrapper {
+  position: relative;
+}
+
+/* Decorative SVG Path Line - Desktop */
+.timeline-desktop-svg-container {
+  position: absolute;
+  top: 3rem; /* top-12 */
+  left: 0;
+  right: 0;
+  display: none;
+  height: 100px;
+}
+
+@media (min-width: 768px) {
+  .timeline-desktop-svg-container {
+    display: block;
+  }
+}
+
+.timeline-svg-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+/* Phases Grid */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem; /* gap-8 */
+  position: relative;
+  padding-top: 120px;
+}
+
+@media (min-width: 768px) {
+  .timeline-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem; /* md:gap-4 */
+  }
+}
+
+.timeline-phase-item {
+  position: relative;
+}
+
+/* Phase Circle */
+.timeline-marker-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.timeline-marker-circle {
+  position: relative;
+  z-index: 10;
+  width: 6rem; /* w-24 */
+  height: 6rem; /* h-24 */
+  border-radius: 9999px; /* rounded-full */
+  background-color: white;
+  border-width: 4px;
+  border-style: solid;
+  /* border-color handled by inline style or default #e5e7eb */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  overflow: hidden;
+}
+
+.timeline-marker-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  opacity: 0.2;
+}
+
+.timeline-icon {
+  width: 2rem; /* w-8 */
+  height: 2rem; /* h-8 */
+  margin-bottom: 0.25rem; /* mb-1 */
+  /* color handled via inline style */
+}
+
+.timeline-number {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 700; /* font-bold */
+}
+
+/* Phase Content Card */
+.timeline-card {
+  background-color: white;
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+  padding: 1.5rem; /* p-6 */
+  cursor: pointer;
+  border-width: 2px;
+  border-style: solid;
+  /* border-color handled via inline style */
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-card-gradient {
+  position: absolute;
+  inset: 0;
+  /* background-image handled via inline gradient classes replacement or variable */
+  opacity: 0.05;
+}
+
+/* We need utility classes for gradients if we replace tailwind entirely, 
+   but specific gradients are passed as props. We'll handle inline styles in JSX 
+   or creating specific classes if they are static. 
+   Here we keep using the gradient prop logic in JSX but the base style is above. 
+*/
+
+.timeline-card-content {
+  position: relative;
+  z-index: 10;
+}
+
+.timeline-card-title {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  color: #111827; /* text-gray-900 */
+  margin-bottom: 0.75rem; /* mb-3 */
+}
+
+.timeline-card-message-wrapper {
+  overflow: hidden;
+}
+
+.timeline-card-message {
+  color: #374151; /* text-gray-700 */
+  line-height: 1.625; /* leading-relaxed */
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+.timeline-card-line {
+  height: 0.25rem; /* h-1 */
+  border-radius: 9999px; /* rounded-full */
+  margin-top: 1rem; /* mt-4 */
+}
+
+/* Mobile Timeline Path */
+.timeline-mobile-path-container {
+  display: block;
+  position: absolute;
+  left: 3rem; /* left-12 */
+  top: 0;
+  bottom: 0;
+  width: 0.5rem; /* w-2 */
+}
+
+@media (min-width: 768px) {
+  .timeline-mobile-path-container {
+    display: none;
+  }
+}
+
+.timeline-mobile-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* CTA 
+.timeline-cta {
+  text-align: center;
+  margin-top: 4rem; 
+}
+
+.timeline-cta-text {
+  color: #4b5563; 
+  margin-bottom: 1rem; 
+}
+
+.timeline-cta-button {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(to right, #3b82f6, #a855f7, #ec4899);
+  color: white;
+  border-radius: 9999px; 
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
+  border: none;
+  cursor: pointer;
+}*/

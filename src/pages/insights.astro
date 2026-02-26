@@ -1,0 +1,15 @@
+---
+// src/pages/insights.astro
+
+import Layout from '../layouts/Layout.astro'; 
+import Navbar from '../components/Navbar';
+import AppInsights from '../components/AppInsights';
+import Footer from '../components/Footer';
+import '../styles/global.css';
+---
+
+<Layout title="Insights Page">
+  <Navbar client:load />
+  <AppInsights client:load />
+  <Footer client:visible />
+</Layout>

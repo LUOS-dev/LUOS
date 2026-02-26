@@ -1,0 +1,163 @@
+.life-section-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  max-width: 1200px;
+  margin: 1rem auto;
+  padding: 1rem;
+  min-height: 850px;
+  background-color: #fff;
+}
+
+/* --- Estilos de los Bloques de Texto --- */
+.ls-text-block p {
+  color: #666;
+  font-size: 1.01rem;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+}
+
+/* --- Posicionamiento en la Grilla --- */
+
+/* Arriba Izquierda */
+.ls-top-left {
+  position: absolute;
+  top: 55px;
+  left: -40px;
+  width: 330px;
+  text-align: justify;
+}
+
+/* Arriba Derecha */
+.ls-top-right {
+  font-size: 4.7rem;
+  position: absolute;
+  top: 60px;
+  right: -5px;
+  width: 370px;
+  text-align:justify;
+}
+
+/* Abajo Izquierda (Título) */
+.ls-bottom-left {
+  font-size: 4.7rem;
+  position: absolute;
+  bottom: 140px;
+  left: -30px;
+  text-align: left;
+}
+
+/* Abajo Derecha (CTA) */
+.ls-bottom-right {
+  position: absolute;
+  bottom: 90px;
+  right: 20px;
+  text-align: center;
+}
+
+/* --- La Imagen Central Recortada --- */
+.ls-image-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: 1360px;
+  height: 764px;
+  
+  /* Centrado de la imagen en su celda */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ls-shaped-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+  /* APLICAMOS EL RECORTE SVG */
+  clip-path: url(#rounded-cross-clip);
+  
+  /* Filtro suave para dar el tono cálido de tu imagen original */
+  transition: transform 0.5s ease;
+}
+
+/* Efecto opcional: ligero zoom al pasar el mouse sobre la imagen */
+.ls-image-container:hover .ls-shaped-image {
+  transform: scale(1.01);
+}
+
+
+/* --- Tipografía y Botones --- */
+.ls-title h2 {
+  font-size: 4.7rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ls-cta-label {
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: #000;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.ls-btn {
+  background-color: #8B5CF6; /* Azul oscuro del diseño */
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: block;
+  width: fit-content;
+  text-transform: capitalize;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.ls-btn:hover {
+  background-color: #1e293b;
+  transform: translateY(-6px);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+  .life-section-container {
+    flex-direction: column;
+    min-height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .ls-top-left, .ls-top-right, .ls-bottom-left, .ls-bottom-right {
+    position: static;
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .ls-image-container {
+    position: static;
+    transform: none;
+    width: 100%;
+    height: 300px;
+    margin: 2rem 0;
+  }
+
+  .ls-title h2 {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,91 @@
+.innovation-section {
+  width: 100%;
+  min-height: 80vh;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  overflow: hidden;
+}
+
+.innovation-container {
+  max-width: 1300px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.innovation-visual {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /*margin-left: -3rem;*/
+}
+
+.eagle-wrapper {
+  width: 100%;
+  max-width: 650px; /* Limitamos el tamaño para que no invada el texto */
+  position: relative;
+}
+.innovation-title {
+  font-family: var(--font-sen); /* Usamos Anton como en tus headers */
+  font-size: 2.8rem;
+  line-height: 1.1;
+  color: #000000;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.highlight-blue {
+  color: #A7BDFC; 
+  font-weight: inherit;
+}
+
+.innovation-text p {
+  font-family: var(--font-sen);
+  font-size: 1.01rem; 
+  color: #4b5563;
+  line-height: 1.8;
+  max-width: 90%;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+  .innovation-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .innovation-section {
+    padding: 4rem 1.5rem;
+  }
+
+  .innovation-container {
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .innovation-title {
+    font-size: 2.5rem;
+  }
+
+  .innovation-text p {
+    max-width: 100%;
+  }
+  
+  /* En móvil, a veces queda mejor el texto arriba o el águila más pequeña */
+  .eagle-wrapper {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-left: -2rem;
+  }
+}
+
+
+

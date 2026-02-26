@@ -1,0 +1,135 @@
+/* src/components/HeroSection.css */
+
+/* FONDO GENERAL: Gradiente azul profundo radial para dar profundidad */
+.start-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  /* Fondo similar a la imagen: centro más claro, bordes oscuros */
+  background: radial-gradient(circle at center, #0f2540 0%, #1D293D 100%);
+  color: #ffffff;
+}
+
+.animated-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Detrás de todo */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-shape {
+  position: absolute;
+  opacity: 0;
+}
+/* Estilo para Círculos */
+.bg-shape.circle {
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.01) 0%, transparent 0%);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.20);
+}
+
+/* Estilo para Cuadrados */
+.bg-shape.square {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.boton {
+  background: #004e9b;
+  color: white;
+  padding: 1rem 3rem;
+  border-radius: 17px;
+  font-family: var(--font-sen);
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.boton:hover {
+  background: #003366;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+/* CONTENIDO PRINCIPAL */
+.start-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-title-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Reducimos el espacio negativo para juntar el reflejo */
+  margin-bottom: 1rem;
+}
+
+/* TEXTO PRINCIPAL "LUOS" */
+.start-title {
+  font-family: var(--font-anton, sans-serif);
+  font-size: 10rem;
+  font-weight: 900;
+  color: #e6e6e6;
+  margin: 0;
+  line-height: 0.90; /* Apretado verticalmente */
+  letter-spacing: -0.07em; /* Apretado horizontalmente */
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* REFLEJO "SOUL" */
+.mirror-block {
+  transform: scaleY(-1); 
+  margin-top: -10px; 
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 20%, transparent 90%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8) 20%, transparent 90%);
+}
+
+.start-mirror {
+  display: block;
+  font-family: var(--font-atom, sans-serif);
+  font-size: 10rem;
+  font-weight: 900;
+  color: #607d8b;
+  line-height: 0.90;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+/* SUBTITULO */
+.start-subtitle {
+  font-family: var(--font-sen, sans-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .start-title, .start-mirror {
+    font-size: 5rem;
+  }
+  
+  .bg-shape {
+    opacity: 0.5; /* Menos intrusivo en móvil */
+  }
+}

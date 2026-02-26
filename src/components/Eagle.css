@@ -1,0 +1,14 @@
+.principal-container{
+    color: #A7BDFC;
+    width: 44rem;
+    height: 44rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 768px) {
+    .principal-container{
+        width: 28rem;
+        height: 28rem;
+    }
+}

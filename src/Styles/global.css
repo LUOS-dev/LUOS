@@ -1,0 +1,213 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Sen:wght@400;500;600;700;800&display=swap');
+
+/* Reset y base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables CSS para las fuentes */
+:root {
+  /* Fuentes */
+  --font-anton: 'Anton', sans-serif; 
+  --font-sen: 'Sen', sans-serif;
+  
+  /* Tamaños de fuente */
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-2xl: 1.5rem;   /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem;  /* 36px */
+  --text-5xl: 3rem;     /* 48px */
+  --text-6xl: 3.75rem;  /* 60px */
+  
+  /* Colores base */
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-dark: #1f2937;
+  --color-light: #f8fafc;
+}
+
+html {
+scroll-behavior: smooth;
+  font-family: var(--font-sen);
+  scroll-behavior: smooth;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+body {
+  font-family: var(--font-sen);
+  font-weight: 400;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos para títulos con fuente Atom */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-atom);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: var(--color-dark);
+}
+
+/* Específicos para cada nivel de título */
+h1 {
+  font-size: var(--text-5xl);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+
+h5 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+h6 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+/* Estilos para texto general con Sen */
+p {
+  font-family: var(--font-sen);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #4b5563;
+}
+
+/* Texto pequeño */
+small, .text-sm {
+  font-family: var(--font-sen);
+  font-size: var(--text-sm);
+}
+
+/* Texto grande */
+.text-lg {
+  font-family: var(--font-sen);
+  font-size: var(--text-lg);
+}
+
+/* Enlaces */
+a {
+  font-family: var(--font-sen);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+/* Botones */
+button {
+  font-family: var(--font-sen);
+  font-weight: 600;
+}
+
+/* Inputs y formularios */
+input, textarea, select {
+  font-family: var(--font-sen);
+}
+
+/* Listas */
+ul, ol {
+  font-family: var(--font-sen);
+}
+
+li {
+  font-family: var(--font-sen);
+}
+
+/* Clases utilitarias para fuentes */
+.font-atom {
+  font-family: var(--font-atom) !important;
+}
+
+.font-sen {
+  font-family: var(--font-sen) !important;
+}
+
+/* Clases para pesos de fuente Atom */
+.font-atom-light { font-family: var(--font-atom); font-weight: 300; }
+.font-atom-regular { font-family: var(--font-atom); font-weight: 400; }
+.font-atom-medium { font-family: var(--font-atom); font-weight: 500; }
+.font-atom-semibold { font-family: var(--font-atom); font-weight: 600; }
+.font-atom-bold { font-family: var(--font-atom); font-weight: 700; }
+.font-atom-black { font-family: var(--font-atom); font-weight: 900; }
+
+/* Clases para pesos de fuente Sen */
+.font-sen-regular { font-family: var(--font-sen); font-weight: 400; }
+.font-sen-medium { font-family: var(--font-sen); font-weight: 500; }
+.font-sen-semibold { font-family: var(--font-sen); font-weight: 600; }
+.font-sen-bold { font-family: var(--font-sen); font-weight: 700; }
+.font-sen-extrabold { font-family: var(--font-sen); font-weight: 800; }
+
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Mejoras de rendimiento para animaciones */
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  
+  h2 {
+    font-size: var(--text-3xl);
+  }
+  
+  h3 {
+    font-size: var(--text-2xl);
+  }
+  
+  h4 {
+    font-size: var(--text-xl);
+  }
+    .hero-title {
+    font-size: 4rem !important;
+  }
+  
+  .hero-mirror {
+    font-size: 4rem !important;
+  }
+}
