@@ -216,12 +216,14 @@ export default function AppEmpower() {
           <p className="text-xl md:text-2xl text-gray-200 mb-16 max-w-4xl mx-auto leading-relaxed">
             Descubra patrones ocultos, prediga tendencias futuras y tome decisiones basadas en datos que impulsen su negocio hacia el éxito
           </p>
+          <a href="/booking" style={{ textDecoration: 'none' }}>
           <button className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 hover:from-orange-600 hover:via-pink-600 hover:to-purple-700 text-white px-12 md:px-24 py-6 rounded-3xl text-xl transition-all duration-300 transform hover:scale-110 shadow-xl min-w-[320px] inline-flex items-center justify-center tracking-wide">
             <span className="flex items-center gap-3">
               Iniciar Análisis Inteligente
             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>
+          </a>
         </div>
       </section>
     </div>

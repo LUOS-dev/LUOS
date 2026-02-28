@@ -189,12 +189,14 @@ export default function AppEmpower() {
           <p className="text-2xl md:text-3xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed">
             Transforme su empresa con soluciones innovadoras que la posicionarán como líder en el mercado global
           </p>
+           <a href="/booking" style={{ textDecoration: 'none' }}>
           <button className="bg-gradient-to-r from-green-500 via-pink-500 to-blue-500 hover:from-green-600 hover:via-pink-600 hover:to-blue-600 text-white px-12 py-6 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 shadow-xl">
             <span className="flex items-center gap-3">
               Empezar Transformación
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>
+          </a>
         </div>
       </section>
     </div>

@@ -190,12 +190,14 @@ export default function AppBuild() {
           <p className="text-2xl md:text-3xl text-gray-200 mb-12 max-w-4xl mx-auto leading-relaxed">
             Contáctanos para descubrir cómo podemos hacer realidad tu visión digital con soluciones innovadoras y personalizadas
           </p>
+          <a href="/booking" style={{ textDecoration: 'none' }}>
           <Button className="bg-gradient-to-r from-amber-600 via-orange-600 to-purple-600 hover:from-amber-700 hover:via-orange-700 hover:to-purple-700 text-white px-12 py-6 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 mx-auto block">
             <span className="flex items-center gap-3">
               Comenzar Proyecto
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </Button>
+          </a>
         </div>
       </section>
     </div>
