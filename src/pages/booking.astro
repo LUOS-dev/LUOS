@@ -4,11 +4,11 @@
 // 1. Importas tu Layout (para que se vea el Navbar y el Footer igual que en el inicio)
 import Layout from '../layouts/Layout.astro'; 
 import Navbar from '../components/Navbar';
-import { Booking } from '../components/Booking';
+import BookingComponent from '../components/Booking';
 import '../styles/global.css';
 ---
 
 <Layout title="Booking Page">
   <Navbar client:load />
-  <Booking client:load />
+  <BookingComponent client:load />
 </Layout>

@@ -433,3 +433,4 @@ function addMinutes(timeStr: string, minutesToAdd: number): string {
     return timeStr;
   }
 }
+export default Booking;
