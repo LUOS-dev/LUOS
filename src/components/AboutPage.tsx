@@ -328,6 +328,7 @@ export function AboutPage() {
             <p className="cta-section__subtitle">
               Conversemos sobre cómo podemos llevar tu empresa al siguiente nivel tecnológico
             </p>
+            <a href="/booking" style={{ textDecoration: 'none' }}>
             <motion.button
               className="cta-section__button"
               whileHover={{
@@ -338,6 +339,7 @@ export function AboutPage() {
             >
               Iniciar Conversación
             </motion.button>
+            </a>
           </motion.div>
         </div>
       </section>

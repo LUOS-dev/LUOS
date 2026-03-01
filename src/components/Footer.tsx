@@ -59,7 +59,7 @@ const Footer = () => {
               <MailIcon />
               <span>luos.consulting@gmail.com</span>
             </a>
-            <a className="footer-contact-item">
+            <a href="tel:+524427891143" className="footer-contact-item">
               <PhoneIcon />
               <span>+52 (44) 27891143</span>
             </a>

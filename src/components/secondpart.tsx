@@ -63,9 +63,11 @@ const SecondPart: React.FC<SecondPartProps> = ({ imageSrc }) => {
         <defs>
           <clipPath
             id="rounded-cross-clip"
-            clipPathUnits="userSpaceOnUse"
+            clipPathUnits="objectBoundingBox"
           >
-            <path d="M0 207
+            <path
+            transform="scale(0.0007347539 0.0013089005)"
+            d="M0 207
             C0 184.356 18.3563 166 41 166
             H369
             C391.644 166 410 147.644 410 125
@@ -97,8 +99,6 @@ const SecondPart: React.FC<SecondPartProps> = ({ imageSrc }) => {
           </clipPath>
         </defs>
       </svg>
-
-
     </section>
   );
 };

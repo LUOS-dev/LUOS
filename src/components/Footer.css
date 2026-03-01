@@ -47,9 +47,9 @@
 .footer-content-wrapper {
     position: relative;
     z-index: 1;
-    max-width: 80rem; /* aprox 1280px */
+    max-width: 85rem; /* aprox 1280px */
     margin: 0 auto;
-    padding: 2rem 0rem;
+    padding: 1rem 1rem 1rem 1rem;
     
     display: grid;
     grid-template-columns: 1fr; /* Móvil: una columna */
@@ -74,10 +74,12 @@
     color: var(--footer-text-white);
     font-size: 2.5rem;
     font-weight: 700;
+    padding: 0rem 1rem;
     margin-bottom: 1rem;
 }
 
 .footer-desc {
+    padding: 1rem 2rem 0rem 1rem;
     color: var(--footer-text-muted);
     font-size: 1.125rem;
     line-height: 1.6;
@@ -88,7 +90,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 2rem;
 }
 
 /* Ítems de contacto y sus animaciones hover */

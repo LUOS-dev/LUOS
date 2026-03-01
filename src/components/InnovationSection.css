@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 2rem;
+  padding: 0rem 0rem;
   overflow: hidden;
 }
 
@@ -14,7 +14,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 3rem;
+  gap: 1rem;
   align-items: center;
 }
 

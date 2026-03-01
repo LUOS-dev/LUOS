@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday } from "date-fns";
 import { es } from "date-fns/locale";
+import logo from "../assets/public/Logo.svg?url";
 import "./Booking.css";
 
 export function Booking() {
@@ -123,7 +124,7 @@ export function Booking() {
               )}
 
               <div style={{ paddingTop: "1.5rem" }}>
-                <div className="logo-circle">L</div>
+                <div className="logo-circle"><img src={logo} alt="Logo de LUOS" className="logo-image" /></div>
                 <h3 className="company-name">LUOS</h3>
                 <h2 className="call-type">Discovery Call</h2>
 
@@ -269,7 +270,7 @@ export function Booking() {
                       required
                       type="text"
                       className="form-input"
-                      placeholder="John Doe"
+                      placeholder="Luis Mayorga"
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -283,7 +284,7 @@ export function Booking() {
                       required
                       type="email"
                       className="form-input"
-                      placeholder="john@example.com"
+                      placeholder="tu-correo@example.com"
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -410,7 +411,6 @@ export function Booking() {
   );
 }
 
-// Helper to add minutes to a time string like "3:00 pm"
 function addMinutes(timeStr: string, minutesToAdd: number): string {
   try {
     const [time, period] = timeStr.split(" ");
