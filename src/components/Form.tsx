@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './Form.css';
+import { formtexts } from "../i18n/home-translations";
+import { useLanguage } from '../i18n/utils';
 
 const ContactForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const { lang } = useLanguage();
+  const texts = formtexts[lang];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,9 +33,9 @@ const ContactForm = () => {
   };
   return (
     <div className="cf-card">
-      <h3 className="cf-title">Cotiza tu Proyecto</h3>
+      <h3 className="cf-title">{texts.tittle}</h3>
       <p className="cf-description">
-        Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas.
+        {texts.info}
       </p>
       
       <form className="cf-form-group" onSubmit={handleSubmit}>
@@ -39,35 +43,35 @@ const ContactForm = () => {
         <input 
           name="nombre"
           type="text" 
-          placeholder="Nombre completo" 
+          placeholder={texts.name} 
           className="cf-input" 
           required
         />
         <input
           name="email"
           type="email" 
-          placeholder="Email" 
+          placeholder={texts.email} 
           className="cf-input" 
           required
         />
         <input
           name="empresa"
           type="text" 
-          placeholder="Empresa" 
+          placeholder={texts.empresa} 
           className="cf-input"
           required 
         />
         <textarea
           name='descripcion' 
-          placeholder="Describe tu proyecto..." 
+          placeholder={texts.descripcion} 
           className="cf-textarea"
           required
         ></textarea>
         
         <button type="submit" className="cf-button" disabled={loading}>
-          {loading ? "Enviando..." : "Enviar Mensaje"}
+          {loading ? texts.sending : texts.btn}
         </button>
-        {success && <p> Mensaje Enviando</p>}
+        {success && <p> {texts.message}</p>}
       </form>
     </div>
   );

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Shrub, Lightbulb, Code2, Rocket } from 'lucide-react';
+import { timelineTexts } from "../i18n/home-translations";
+import { useLanguage } from '../i18n/utils';
 import './TimeLine.css';
 
 interface Phase {
@@ -12,42 +14,45 @@ interface Phase {
   gradient: string;
 }
 
-const phases: Phase[] = [
-  {
-    number: '01',
-    title: 'Discovery & Strategy',
-    clientMessage: 'Definimos la hoja de ruta para evitar retrabajos.',
-    icon: Shrub,
-    color: '#3b82f6', // blue
-    gradient: 'from-blue-500 to-blue-600',
-  },
-  {
-    number: '02',
-    title: 'Strategic Blueprint',
-    clientMessage: 'Visualizas tu solución antes de tirar una sola línea de código.',
-    icon: Lightbulb,
-    color: '#8b5cf6', // purple
-    gradient: 'from-purple-500 to-purple-600',
-  },
-  {
-    number: '03',
-    title: 'Iterative Building',
-    clientMessage: 'Entregas constantes para que veas el progreso en tiempo real.',
-    icon: Code2,
-    color: '#ec4899', // pink
-    gradient: 'from-pink-500 to-pink-600',
-  },
-  {
-    number: '04',
-    title: 'Launch & Evolution',
-    clientMessage: 'Tu sistema cobra vida y escala contigo.',
-    icon: Rocket,
-    color: '#f59e0b', // amber
-    gradient: 'from-amber-500 to-amber-600',
-  },
-];
-
 export function Timeline() {
+  const { lang } = useLanguage();
+  const texts = timelineTexts[lang];
+
+  const phases: Phase[] = [
+    {
+      number: '01',
+      title: texts.cardtittle1,
+      clientMessage: texts.text1,
+      icon: Shrub,
+      color: '#3b82f6', // blue
+      gradient: 'from-blue-500 to-blue-600',
+    },
+    {
+      number: '02',
+      title: texts.cardtittle2,
+      clientMessage: texts.text2,
+      icon: Lightbulb,
+      color: '#8b5cf6', // purple
+      gradient: 'from-purple-500 to-purple-600',
+    },
+    {
+      number: '03',
+      title: texts.cardtittle3,
+      clientMessage: texts.text3,
+      icon: Code2,
+      color: '#ec4899', // pink
+      gradient: 'from-pink-500 to-pink-600',
+    },
+    {
+      number: '04',
+      title: texts.cardtittle4,
+      clientMessage: texts.text4,
+      icon: Rocket,
+      color: '#f59e0b', // amber
+      gradient: 'from-amber-500 to-amber-600',
+    },
+  ];
+
   const [activePhase, setActivePhase] = useState<number | null>(null);
   const [hoveredPhase, setHoveredPhase] = useState<number | null>(null);
 
@@ -68,7 +73,7 @@ export function Timeline() {
             transition={{ duration: 0.6 }}
             className="timeline-title"
           >
-            Conoce tu camino al éxito
+            {texts.title}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: -20 }}
@@ -76,7 +81,7 @@ export function Timeline() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="timeline-subtitle"
           >
-            Conoce el camino que Transcurrirá tu proyecto, desde la idea hasta el lanzamiento
+            {texts.subtitle}
           </motion.p>
         </div>
 

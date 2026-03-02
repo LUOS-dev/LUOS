@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion';
 import { GeometricEagle } from './GeometricEagle';
+import { innovationSectionTexts } from "../i18n/home-translations";
+import { useLanguage } from '../i18n/utils';
 import './InnovationSection.css';
 
 const InnovationSection = () => {
+  const { lang } = useLanguage();
+  const texts = innovationSectionTexts[lang];
+
   return (
     <section className="innovation-section">
       <div className="innovation-container">
@@ -24,9 +29,9 @@ const InnovationSection = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            TU NUEVO ALIADO QUE <br />
-            <span className="highlight-blue">INNOVA</span> DESDE LO MÁS <br />
-            PROFUNDO
+            {texts.text1} <br />
+            <span className="highlight-blue">{texts.text2}</span> {texts.text3} <br />
+            {texts.text4}
           </motion.h2>
 
           <motion.div
@@ -37,10 +42,7 @@ const InnovationSection = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           >
             <p>
-              En LUOS entendemos que la verdadera innovación nace desde el
-              interior de cada organización. Nos sumergimos en tu negocio para
-              crear soluciones tecnológicas que no solo resuelven problemas, sino
-              que transforman la manera en que operas.
+              {texts.parrafo}
             </p>
           </motion.div>
         </div>

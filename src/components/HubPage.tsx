@@ -1,36 +1,44 @@
 import { Hammer, Zap, Brain, ArrowRight, Code } from "lucide-react";
 import { Card, CardContent } from "./card";
 import { motion } from "motion/react";
+import { hubPageTexts } from "../i18n/home-translations";
+import { useLanguage } from '../i18n/utils';
 import "./HubPage.css";
 
-const sections = [
-  {
-    id: "build",
-    title: "BUILD",
-    icon: <Code className="icon" />,
-    description: "Desarrollo de software a medida para su negocio.",
-    summary: "Creamos soluciones robustas y escalables: Software Empresarial, Diseño UI/UX, Identidad Digital y Automatización.",
-    gradient: "gradient-build",
-  },
-  {
-    id: "empower",
-    title: "EMPOWER",
-    icon: <Zap className="icon" />,
-    description: "Estrategias para liderar el mercado global.",
-    summary: "Impulse su crecimiento con soluciones que mantienen su negocio a la vanguardia, optimizando recursos y expandiendo su alcance.",
-    gradient: "gradient-empower",
-  },
-  {
-    id: "insights",
-    title: "INSIGHTS",
-    icon: <Brain className="icon" />,
-    description: "Inteligencia artificial y análisis de datos.",
-    summary: "Transforme datos en decisiones. Utilice AI Analytics para descubrir patrones, predecir tendencias y optimizar operaciones.",
-    gradient: "gradient-insights",
-  }
-];
+
 
 export default function HubPage() {
+  const { lang } = useLanguage();
+  const texts = hubPageTexts[lang];
+  const sections = [
+    
+    {
+      id: "build",
+      title: "BUILD",
+      icon: <Code className="icon" />,
+      description: texts.firstText1,
+      summary: texts.secondText1,
+      gradient: "gradient-build",
+    },
+    {
+      id: "empower",
+      title: "EMPOWER",
+      icon: <Zap className="icon" />,
+      description: texts.firstText2,
+      summary: texts.secondText2,
+      gradient: "gradient-empower",
+    },
+    {
+      id: "insights",
+      title: "INSIGHTS",
+      icon: <Brain className="icon" />,
+      description: texts.firstText3,
+      summary: texts.secondText3,
+      gradient: "gradient-insights",
+    }
+  ];
+
+
   return (
     <div className="hub-page-container">
       {/* Background Elements */}
@@ -48,7 +56,7 @@ export default function HubPage() {
             transition={{ duration: 0.8 }}
             className="main-title"
           >
-            Bienvenido a su <span className="title-gradient">Consultoria TI</span>
+            {texts.tittle1} <span className="title-gradient">{texts.tittle2}</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
@@ -56,7 +64,7 @@ export default function HubPage() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="subtitle"
           >
-            Seleccione una opción para explorar nuestras soluciones
+            {texts.option}
           </motion.p>
         </div>
 
@@ -94,7 +102,7 @@ export default function HubPage() {
                     </div>
 
                     <div className="explore-link">
-                        Explorar <ArrowRight className="explore-arrow" />
+                        {texts.btn} <ArrowRight className="explore-arrow" />
                     </div>
                   </CardContent>
                 </Card>

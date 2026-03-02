@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
-import { information } from "./insights-data";
+import { information } from "../i18n/AppInsights-data";
 import { ArrowRight } from "lucide-react";
 import "../Styles/figma-theme.css";
 import "../Styles/appinsights.css";

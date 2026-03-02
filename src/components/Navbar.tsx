@@ -3,55 +3,59 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, Code, Database, Coffee, Megaphone, Settings, Lightbulb } from "lucide-react";
 import "./Navbar.css";
 import logo from "../assets/public/Logo.svg?url";
-import { set } from "astro:schema";
+import { navBarTexts } from "../i18n/home-translations";
+import { useLanguage } from "../i18n/utils";
 
 export default function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { lang, setLanguage } = useLanguage();
+
+  const texts = navBarTexts[lang];
 
   const services = [
     { 
       icon: <Code className="nav-icon" />, 
-      title: "Desarrollo de Software", 
-      description: "Aplicaciones web y móviles personalizadas",
+      title: texts.services.software.title,
+      description: texts.services.software.description,
       href: "/build" 
     },
     { 
       icon: <Database className="nav-icon" />, 
-      title: "Big Data & Analytics", 
-      description: "Análisis de datos e inteligencia de negocios",
+      title: texts.services.bigData.title,
+      description: texts.services.bigData.description,
       href: "/insights" 
     },
     { 
       icon: <Settings className="nav-icon" />, 
-      title: "Consultoría TI", 
-      description: "Estrategia y transformación digital",
+      title: texts.services.consulting.title,
+      description: texts.services.consulting.description,
       href: "/empower" 
     },
     { 
       icon: <Lightbulb className="nav-icon" />, 
-      title: "Innovación", 
-      description: "R&D y tecnologías emergentes",
+      title: texts.services.innovation.title,
+      description: texts.services.innovation.description,
       href: "/empower" 
     },
     { 
       icon: <Megaphone className="nav-icon" />, 
-      title: "LUOS Blog",
-      description: "Siteo informativo sobre el mundo tech",
+      title: texts.services.blog.title,
+      description: texts.services.blog.description,
       href: "/"
     },
     { 
       icon: <Coffee className="nav-icon" />, 
-      title: "Nuestra Historia", 
-      description: "Conoce el viaje de LUOS y nuestro impacto en la industria",
+      title: texts.services.history.title,
+      description: texts.services.history.description,
       href: "/about" 
     }
   ];
 
   const menuItems = [
-    { name: "Build", href: "/build" },
-    { name: "Empower", href: "/empower" },
-    { name: "Insights", href: "/insights" }
+    { name: texts.menu.build, href: "/build" },
+    { name: texts.menu.empower, href: "/empower" },
+    { name: texts.menu.insights, href: "/insights" }
   ];
 
   const scrollToSection = (href: string) => {
@@ -125,7 +129,7 @@ export default function Navbar() {
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <span>Services</span>
+                  <span>{texts.dropdown}</span>
                   <motion.div
                     animate={{ rotate: isServicesOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
@@ -201,13 +205,30 @@ export default function Navbar() {
 
             {/* CTA Button & Mobile Menu */}
             <div className="navbar-actions">
+              <div className="navbar-lang-switch" role="group" aria-label="Language selector">
+                <button
+                  type="button"
+                  className={`navbar-lang-btn ${lang === "es" ? "active" : ""}`}
+                  onClick={() => setLanguage("es")}
+                >
+                  ES
+                </button>
+                <button
+                  type="button"
+                  className={`navbar-lang-btn ${lang === "en" ? "active" : ""}`}
+                  onClick={() => setLanguage("en")}
+                >
+                  EN
+                </button>
+              </div>
+
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <a href="/booking" style={{ textDecoration: 'none' }}>
                   <button className="navbar-cta-button">
-                    Agenda una Llamada
+                    {texts.agendar}
                   </button>
                 </a>
               </motion.div>
@@ -235,13 +256,30 @@ export default function Navbar() {
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div className="navbar-mobile-content">
+                <div className="navbar-lang-switch navbar-lang-switch-mobile" role="group" aria-label="Language selector">
+                  <button
+                    type="button"
+                    className={`navbar-lang-btn ${lang === "es" ? "active" : ""}`}
+                    onClick={() => setLanguage("es")}
+                  >
+                    ES
+                  </button>
+                  <button
+                    type="button"
+                    className={`navbar-lang-btn ${lang === "en" ? "active" : ""}`}
+                    onClick={() => setLanguage("en")}
+                  >
+                    EN
+                  </button>
+                </div>
+
                 {/* Mobile Services */}
                 <div>
                   <button
                     className="navbar-mobile-dropdown-trigger"
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
                   >
-                    <span>Services</span>
+                    <span>{texts.dropdown}</span>
                     <motion.div
                       animate={{ rotate: isServicesOpen ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
@@ -289,7 +327,7 @@ export default function Navbar() {
                 <div className="navbar-mobile-cta">
                   <a href="/booking" style={{ textDecoration: 'none' }}>
                     <button className="navbar-cta-button navbar-cta-button-mobile">
-                      Agenda una Llamada
+                      {texts.agendar}
                     </button>
                   </a>
                 </div>

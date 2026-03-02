@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
-import { information } from "./empower-data";
+import { information } from "../i18n/AppEmpower-data";
 import { ArrowRight } from "lucide-react";
 import "../Styles/appempower.css";
 import "../Styles/components.css";

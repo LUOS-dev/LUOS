@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
-import { services } from "./services-data";
+import { services } from "../i18n/Appbuild-data";
 import { ArrowRight } from "lucide-react";
 import "../Styles/appbuild.css";
 import "../Styles/components.css";

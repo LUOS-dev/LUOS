@@ -253,6 +253,55 @@
   gap: 1rem;
 }
 
+.navbar-lang-switch {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+@media (min-width: 768px) {
+  .navbar-lang-switch {
+    display: inline-flex;
+  }
+}
+
+.navbar-lang-switch-mobile {
+  display: inline-flex;
+}
+
+@media (min-width: 768px) {
+  .navbar-lang-switch-mobile {
+    display: none;
+  }
+}
+
+.navbar-lang-btn {
+  border: none;
+  background: transparent;
+  color: var(--color-gray);
+  font-family: var(--font-sen);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 9999px;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-lang-btn:hover {
+  color: var(--color-primary);
+}
+
+.navbar-lang-btn.active {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: #fff;
+}
+
 /* BOTÓN CTA CON SEN */
 .navbar-cta-button {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
@@ -479,4 +528,21 @@
 
 .dark .navbar-mobile-cta {
   border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .navbar-lang-switch {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.75);
+}
+
+.dark .navbar-lang-btn {
+  color: #cbd5e1;
+}
+
+.dark .navbar-lang-btn:hover {
+  color: #60a5fa;
+}
+
+.dark .navbar-lang-btn.active {
+  color: #fff;
 }

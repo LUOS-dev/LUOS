@@ -1,18 +1,19 @@
 import React from 'react';
 import './secondpart.css';
-
+import { useLanguage } from '../i18n/utils';
+import { secondPartTexts } from "../i18n/home-translations";
 interface SecondPartProps {
   imageSrc: string;
 }
 
 const SecondPart: React.FC<SecondPartProps> = ({ imageSrc }) => {
+  const { lang } = useLanguage();
+    const texts = secondPartTexts[lang];
   return (
     <section className="life-section-container">
       <div className="ls-text-block ls-top-left">
         <p>
-          Nuestra misión en LUOS-tech es empoderar a pequeñas y medianas empresas con tecnología que
-          no solo ahorra tiempo, sino que les permite enfocarse en lo que realmente importa: innovar
-          y alcanzar su máximo potencial.
+          {texts.parrafo1}
         </p>
       </div>
 
@@ -24,10 +25,7 @@ const SecondPart: React.FC<SecondPartProps> = ({ imageSrc }) => {
       </div>
       <div className="ls-text-block ls-top-right">
         <p>
-          En LUOStech, convertimos los procesos lentos y tediosos de tu negocio en flujos de trabajo 
-          eficientes y automatizados, esto te permite ahorrar tiempo, reducir costos y enfocarte en hacer 
-          crecer tu negocio. Además, respaldamos nuestras soluciones con una garantía de un año de soporte 
-          y mantenimiento sin costo, para que tengas total tranquilidad y tus operaciones nunca se detengan.
+          {texts.parrafo2}
         </p>
       </div>
 
@@ -41,9 +39,9 @@ const SecondPart: React.FC<SecondPartProps> = ({ imageSrc }) => {
 
       {/* --- Botón y Call to Action Inferior Derecha --- */}
       <div className="ls-text-block ls-bottom-right">
-        <span className="ls-cta-label">DA EL PRIMER PASO</span>
+        <span className="ls-cta-label">{texts.title2}</span>
         <a href="/booking" style={{ textDecoration: 'none' }}>
-          <button className="ls-btn">Empezar</button>
+          <button className="ls-btn">{texts.btn}</button>
         </a>
       </div>
 

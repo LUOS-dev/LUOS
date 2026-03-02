@@ -1,12 +1,16 @@
 import { motion, cubicBezier } from 'framer-motion';
 import AnimatedBackground from './AnimatedBackground';
+import { startSectionTexts } from "../i18n/home-translations";
 import './StartSection.css';
+import { useLanguage } from '../i18n/utils';
 
 const StartSection = () => {
   const appleTransition = {
     duration: 1.5,
     ease: cubicBezier(0.16, 1, 0.3, 1),
   };
+  const { lang } = useLanguage();
+  const texts = startSectionTexts[lang];
 
   return (
     <section className="start-container">
@@ -43,7 +47,7 @@ const StartSection = () => {
           transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
           className="start-subtitle"
         >
-          Recreamos lo obvio. Creamos lo único
+          {texts.subt}
         </motion.p>
 
         <motion.div
@@ -57,7 +61,7 @@ const StartSection = () => {
           <a href="/booking" style={{ textDecoration: 'none' }}>
 
           <button className="boton" onClick={() => console.log('Comenzar proyecto')}>
-            Comienza tu proyecto
+            {texts.btn}
           </button>
           </a>
         </motion.div>
