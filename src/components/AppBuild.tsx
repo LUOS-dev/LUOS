@@ -12,7 +12,7 @@ export default function AppBuild() {
   const { hero, services, cta } = getAppBuildContent(lang);
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ overflowX: 'hidden' }}>
       {/* Hero Section - Starting with purple-blue gradient */}
       <section className="min-h-screen bg-gradient-to-br from-purple-900 via-violet-900 to-blue-900 relative overflow-hidden">
         {/* Floating Elements with harmonious colors */}

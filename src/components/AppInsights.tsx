@@ -13,7 +13,7 @@ export default function AppEmpower() {
   const { hero, information, cta } = getAppInsightsContent(lang);
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ overflowX: 'hidden' }}>
       {/* Hero Section - Figma Theme Gradient - Vibrant Red/Orange */}
       <section className="min-h-screen relative overflow-hidden" style={{backgroundImage: "linear-gradient(135deg, #C73C1D 0%, #A82D2D 50%, #8B1F1F 100%)"}}>
         {/* Floating Elements with insights colors */}

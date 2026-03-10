@@ -759,4 +759,29 @@ button:focus-visible {
   /* Reduce icon sizes on mobile */
   .w-40 { width: 8rem; }
   .h-40 { height: 8rem; }
+
+  /* Fix stats grid overflow - stack on mobile */
+  .grid-cols-3 { grid-template-columns: 1fr; }
+
+  /* Fix title+icon row overflow */
+  .flex.items-center.gap-6 {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .flex.items-center.gap-6 h2 {
+    width: 100%;
+    text-align: center;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Prevent horizontal page overflow from rotated elements */
+  .service-section {
+    overflow-x: hidden;
+  }
+  .rotate-3,
+  .transform.rotate-3 {
+    transform: none;
+  }
 }

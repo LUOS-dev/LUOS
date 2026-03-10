@@ -12,7 +12,7 @@ export default function AppEmpower() {
   const { hero, information, cta } = getAppEmpowerContent(lang);
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ overflowX: 'hidden' }}>
       {/* Hero Section - Light gradient */}
       <section className="min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-blue-50 relative overflow-hidden">
         {/* Floating Elements with light colors */}
