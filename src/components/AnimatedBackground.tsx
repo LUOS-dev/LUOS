@@ -1,9 +1,8 @@
-
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-
 const AnimatedBackground = () => {
-  const [shapes, setShapes] = useState<any[]>([]);
+  
+   const [shapes, setShapes] = useState<any[]>([]);
 
   useEffect(() => {
     // Generamos las figuras SOLO cuando el componente ya está en el navegador
@@ -21,9 +20,9 @@ const AnimatedBackground = () => {
 
   // Si no hay formas calculadas aún, no renderizamos nada (evita parpadeos)
   if (shapes.length === 0) return null;
-
   return (
     <div className="animated-bg-container">
+      {/*<div className="rotating-square" />*/}
       {shapes.map((shape) => (
         <motion.div
           key={shape.id}

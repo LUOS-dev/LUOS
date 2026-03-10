@@ -1,12 +1,16 @@
 import React from "react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
-import { services } from "../i18n/Appbuild-data";
+import { getAppBuildContent } from "../i18n/Appbuild-data";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../i18n/utils";
 import "../Styles/appbuild.css";
 import "../Styles/components.css";
 
 export default function AppBuild() {
+  const { lang } = useLanguage();
+  const { hero, services, cta } = getAppBuildContent(lang);
+
   return (
     <div className="relative">
       {/* Hero Section - Starting with purple-blue gradient */}
@@ -22,14 +26,14 @@ export default function AppBuild() {
         <div className="container mx-auto px-6 py-16 relative z-10">
           <div className="text-center mb-16">
             <h1 className="text-6xl md:text-8xl mb-8 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
-              TU SOFTWARE
+              {hero.title}
             </h1>
             <div className="max-w-4xl mx-auto">
               <p className="text-2xl md:text-3xl text-gray-200 leading-relaxed mb-6">
-                Crea, inventa actualiza o integra tu solución a la medida que diga tu alma.
+                {hero.subtitle}
               </p>
               <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                Nuestro trabajo es ofrecer el mejor software para tu negocio, puedes contar con una integración completa:
+                {hero.description}
               </p>
             </div>
           </div>
@@ -185,15 +189,15 @@ export default function AppBuild() {
 
         <div className="container mx-auto px-6 text-center relative z-10">
           <h3 className="text-5xl md:text-6xl mb-8 bg-gradient-to-r from-white via-amber-200 to-purple-200 bg-clip-text text-transparent">
-            ¿Listo para transformar tu negocio?
+            {cta.title}
           </h3>
           <p className="text-2xl md:text-3xl text-gray-200 mb-12 max-w-4xl mx-auto leading-relaxed">
-            Contáctanos para descubrir cómo podemos hacer realidad tu visión digital con soluciones innovadoras y personalizadas
+            {cta.description}
           </p>
           <a href="/booking" style={{ textDecoration: 'none' }}>
           <Button className="bg-gradient-to-r from-amber-600 via-orange-600 to-purple-600 hover:from-amber-700 hover:via-orange-700 hover:to-purple-700 text-white px-12 py-6 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 mx-auto block">
             <span className="flex items-center gap-3">
-              Comenzar Proyecto
+              {cta.button}
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </Button>

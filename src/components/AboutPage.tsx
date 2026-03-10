@@ -1,35 +1,40 @@
 import { motion } from 'motion/react';
-import { Target, Compass, Zap, Users, Shield, TrendingUp, Heart } from 'lucide-react';
+import { Target, Compass, Zap, Star, Shield, UserStar, Heart } from 'lucide-react';
 import './AboutPage.css';
+import { storyText } from '../i18n/story-translations';
+import { useLanguage } from '../i18n/utils';
 
-const values = [
+
+export function AboutPage() {
+  const {lang} = useLanguage();
+  const texts=storyText[lang];
+  const values = [
   {
     icon: Zap,
-    title: 'Innovación Constante',
-    description: 'Transformamos ideas en soluciones tecnológicas de vanguardia.',
+    title: [texts.cardTitle1],
+    description: [texts.cardText1],
     cssClass: 'innovation',
   },
   {
-    icon: Users,
-    title: 'Colaboración',
-    description: 'Tu éxito es nuestro éxito. Trabajamos hombro a hombro contigo.',
+    icon: Star,
+    title: [texts.cardTitle2],
+    description: [texts.cardText2],
     cssClass: 'collaboration',
   },
   {
     icon: Shield,
-    title: 'Confianza',
-    description: 'Transparencia y compromiso en cada línea de código.',
+    title: [texts.cardTitle3],
+    description: [texts.cardText3],
     cssClass: 'trust',
   },
   {
-    icon: TrendingUp,
-    title: 'Excelencia',
-    description: 'No nos conformamos con menos que la perfección técnica.',
+    icon: UserStar,
+    title: [texts.cardTitle4],
+    description: [texts.cardText4],
     cssClass: 'excellence',
   },
 ];
 
-export function AboutPage() {
   return (
     <div className="about-page">
       {/* Hero Section */}
@@ -69,10 +74,10 @@ export function AboutPage() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="about-hero__title">
-              Somos <span className="about-hero__title-gradient">LUOS</span>
+              {texts.title1} <span className="about-hero__title-gradient">{texts.title2}</span>
             </h1>
             <p className="about-hero__subtitle">
-              Arquitectos digitales que transforman desafíos empresariales en soluciones tecnológicas escalables.
+              {texts.description}
             </p>
           </motion.div>
 
@@ -119,10 +124,10 @@ export function AboutPage() {
                   <div className="card__icon-container">
                     <Target className="card__icon" />
                   </div>
-                  <h2 className="card__title">Nuestra Misión</h2>
+                  <h2 className="card__title">{texts.subTittle1}</h2>
                   <p className="card__description">
-                    Empoderar a las empresas con tecnología de clase mundial que impulsa el crecimiento sostenible y la innovación continua.
-                  </p>
+                    {texts.descriptionMision}
+                    </p>
                 </div>
 
                 {/* Decorative lines */}
@@ -149,9 +154,9 @@ export function AboutPage() {
                   <div className="card__icon-container">
                     <Compass className="card__icon" />
                   </div>
-                  <h2 className="card__title">Nuestra Visión</h2>
+                  <h2 className="card__title">{texts.subTittle2}</h2>
                   <p className="card__description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam varius finibus tortor nec fringilla. Pellentesque et tellus vestibulum, cursus quam quis, lacinia odio. Aliquam vitae mi et est semper scelerisque id sed neque. Aliquam erat volutpat. Donec a tempor felis. Nulla sed neque purus. Sed ornare nisi sit amet massa venenatis, at dictum massa dictum. Maecenas facilisis, massa vitae bibendum condimentum, ex ligula tempus sem, quis tristique lorem felis at enim.
+                    {texts.descriptioVision}
                   </p>
                 </div>
 
@@ -198,10 +203,10 @@ export function AboutPage() {
             className="values-section__header"
           >
             <h2 className="values-section__title">
-              Nuestros Valores
+              {texts.subTittle3}
             </h2>
             <p className="values-section__subtitle">
-              Los principios que guían cada decisión y cada línea de código
+              {texts.descriptionValues}
             </p>
           </motion.div>
 
@@ -262,24 +267,24 @@ export function AboutPage() {
             </div>
 
             <h2 className="story-section__title">
-              Nuestra Historia
+              {texts.subTittle4}
             </h2>
 
             <div className="story-section__content">
               <p>
-                Nacimos de la frustración de ver empresas con gran potencial limitadas por barreras tecnológicas. En LUOS, creemos que la tecnología debe ser un <span className="story-section__highlight-blue">acelerador, no un obstáculo</span>.
+                {texts.descriptionStory1} <span className="story-section__highlight-blue">{texts.descriptionStory2}</span>.
               </p>
               <p>
-                Cada proyecto es una oportunidad para demostrar que, con el enfoque correcto, <span className="story-section__highlight-purple">cualquier visión puede convertirse en realidad digital</span>.
+                {texts.descriptionStory3} <span className="story-section__highlight-purple">{texts.descriptionStory4}</span>.
               </p>
             </div>
 
             {/* Stats */}
             <div className="story-section__stats">
               {[
-                { number: '100+', label: 'Proyectos' },
-                { number: '50+', label: 'Clientes Felices' },
-                { number: '5+', label: 'Años de Experiencia' },
+                { number: '100%', label: [texts.dato1] },
+                { number: '0', label: [texts.dato2] },
+                { number: '1+', label: [texts.dato3] },
               ].map((stat, index) => (
                 <motion.div
                   key={index}
@@ -323,10 +328,10 @@ export function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="cta-section__title">
-              ¿Listo para transformar tu negocio?
+              {texts.lastTitle}
             </h2>
             <p className="cta-section__subtitle">
-              Conversemos sobre cómo podemos llevar tu empresa al siguiente nivel tecnológico
+              {texts.lastText}
             </p>
             <a href="/booking" style={{ textDecoration: 'none' }}>
             <motion.button
@@ -337,7 +342,7 @@ export function AboutPage() {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              Iniciar Conversación
+              {texts.button}
             </motion.button>
             </a>
           </motion.div>

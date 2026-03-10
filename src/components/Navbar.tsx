@@ -38,12 +38,12 @@ export default function Navbar() {
       description: texts.services.innovation.description,
       href: "/empower" 
     },
-    { 
+    /*{ 
       icon: <Megaphone className="nav-icon" />, 
       title: texts.services.blog.title,
       description: texts.services.blog.description,
       href: "/"
-    },
+    },*/
     { 
       icon: <Coffee className="nav-icon" />, 
       title: texts.services.history.title,

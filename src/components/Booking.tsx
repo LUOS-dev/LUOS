@@ -1,14 +1,25 @@
-import { useState } from "react";
-import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday } from "date-fns";
+import { useMemo, useState } from "react";
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday, isBefore, startOfDay } from "date-fns";
 import { es } from "date-fns/locale";
 import logo from "../assets/public/Logo.svg?url";
+import { bookingTexts } from "../i18n/booking-translation";
+import { useLanguage } from "../i18n/utils";
 import "./Booking.css";
 
+
 export function Booking() {
+  const BASE_TIMEZONE = "America/Mexico_City";
+  
   const [step, setStep] = useState(1);
   const [date, setDate] = useState<Date>(new Date());
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [timezone, setTimezone] = useState<string>(
+    Intl.DateTimeFormat().resolvedOptions().timeZone || BASE_TIMEZONE
+  );
+  const { lang } = useLanguage();
+  const texts = bookingTexts[lang];
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,15 +28,28 @@ export function Booking() {
   });
   const [showGuestInput, setShowGuestInput] = useState(false);
   const [guests, setGuests] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Mock available times
-  const availableTimes = [
-    "9:00 am",
+  // Base slots are defined in Mexico City timezone and shown converted to the selected timezone.
+  const baseAvailableTimes = [
     "10:30 am",
-    "1:00 pm",
-    "3:00 pm",
-    "4:30 pm",
+    "12:00 pm",
+    "2:00 pm",
+    "3:30 pm",
   ];
+
+  const availableTimes = useMemo(
+    () =>
+      baseAvailableTimes.map((baseTime) => ({
+        baseTime,
+        displayTime: convertTimeBetweenTimeZones(baseTime, BASE_TIMEZONE, timezone, date),
+      })),
+    [timezone, date]
+  );
+
+  const selectedDisplayTime = selectedTime
+    ? convertTimeBetweenTimeZones(selectedTime, BASE_TIMEZONE, timezone, date)
+    : null;
 
   const handleTimeSelect = (time: string) => {
     setSelectedTime(time);
@@ -41,13 +65,46 @@ export function Booking() {
     setStep(1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const guestList = guests.filter(g => g.trim() !== "").join(", ");
-    const message = guestList 
-      ? `¡Llamada agendada con éxito! Te hemos enviado un correo con los detalles.\n\nInvitados: ${guestList}`
-      : "¡Llamada agendada con éxito! Te hemos enviado un correo con los detalles.";
-    alert(message);
+
+    if (!selectedTime || isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    const guestList = guests.filter(g => g.trim() !== "").map(g => g.trim());
+
+    const startUTC = createUTCDate(date, selectedTime, BASE_TIMEZONE);
+
+    const payload = {
+      ...formData,
+      date: startUTC,
+      time: selectedDisplayTime,
+      timezone,
+      guests: guestList
+    };
+
+    try {
+      const res = await fetch("/api/schedule-call", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        alert("¡Llamada agendada! Revisa tu correo.");
+      } else {
+        alert("Hubo un error al agendar.");
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Error de conexión.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleAddGuest = () => {
@@ -90,9 +147,6 @@ export function Booking() {
 
   // Format date for display
   const formattedDate = format(date, "EEEE, MMMM d", { locale: es });
-  const fullDateString = selectedTime
-    ? `${selectedTime} - ${addMinutes(selectedTime, 30)}, ${format(date, "EEEE, MMMM d, yyyy", { locale: es })}`
-    : "";
 
   const weekdays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
   const daysInMonth = getDaysInMonth();
@@ -101,8 +155,8 @@ export function Booking() {
     <div className="booking-page">
       <main className="booking-main">
         <div className="booking-header fade-in">
-          <h1 className="booking-title">Cuéntanos sobre tu proyecto</h1>
-          <p className="booking-subtitle">Agenda una llamada con nosotros</p>
+          <h1 className="booking-title">{texts.title}</h1>
+          <p className="booking-subtitle">{texts.subTitle}</p>
         </div>
 
         <div className="booking-card slide-in-right">
@@ -119,14 +173,14 @@ export function Booking() {
                   <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
-                  Atrás
+                  {texts.buttonBack}
                 </button>
               )}
 
               <div style={{ paddingTop: "1.5rem" }}>
                 <div className="logo-circle"><img src={logo} alt="Logo de LUOS" className="logo-image" /></div>
                 <h3 className="company-name">LUOS</h3>
-                <h2 className="call-type">Discovery Call</h2>
+                <h2 className="call-type">{texts.callSubTitle}</h2>
 
                 <div className="info-list">
                   <div className="info-item">
@@ -136,17 +190,17 @@ export function Booking() {
                     <span className="info-text">30 Min</span>
                   </div>
 
-                  {step === 2 && selectedTime ? (
+                  {step === 2 && selectedTime && selectedDisplayTime ? (
                     <div className="info-item slide-in-left">
                       <svg className="info-icon icon-large info-icon-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                       <div className="date-info">
                         <span className="info-text info-text-white">
-                          {selectedTime} - {addMinutes(selectedTime, 30)}
+                          {selectedDisplayTime} - {addMinutes(selectedDisplayTime, 30)}
                         </span>
                         <span>{format(date, "EEEE, MMMM d, yyyy", { locale: es })}</span>
-                        <span className="timezone-text">Mexico City Time</span>
+                        <span className="timezone-text">{timezone}</span>
                       </div>
                     </div>
                   ) : (
@@ -155,7 +209,7 @@ export function Booking() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <span className="info-text-small">
-                        Los detalles de la conferencia web se proporcionarán tras la confirmación.
+                        {texts.infoForm}
                       </span>
                     </div>
                   )}
@@ -171,7 +225,7 @@ export function Booking() {
             {step === 1 ? (
               <div className="fade-in">
                 <div className="step-header">
-                  <h3 className="step-title">Selecciona fecha y hora</h3>
+                  <h3 className="step-title">{texts.TitleSchedile}</h3>
                   <span className="selected-date">{formattedDate}</span>
                 </div>
 
@@ -205,12 +259,14 @@ export function Booking() {
                             const isSelected = isSameDay(day, date);
                             const isCurrentMonth = isSameMonth(day, currentMonth);
                             const isTodayDay = isToday(day);
+                            const isPast = isBefore(day, startOfDay(new Date()));
 
                             return (
                               <button
                                 key={index}
-                                onClick={() => handleDateSelect(day)}
-                                className={`calendar-day ${isSelected ? "selected" : ""} ${isTodayDay && !isSelected ? "today" : ""} ${!isCurrentMonth ? "other-month" : ""}`}
+                                onClick={() => !isPast && handleDateSelect(day)}
+                                disabled={isPast}
+                                className={`calendar-day ${isSelected ? "selected" : ""} ${isTodayDay && !isSelected ? "today" : ""} ${!isCurrentMonth ? "other-month" : ""} ${isPast ? "disabled" : ""}`}
                               >
                                 {format(day, "d")}
                               </button>
@@ -221,23 +277,32 @@ export function Booking() {
                     </div>
 
                     <div className="timezone-section">
-                      <label className="timezone-label">Zona Horaria</label>
-                      <select className="timezone-select" defaultValue="mx">
-                        <option value="mx">Mexico City Time (GMT-6)</option>
-                        <option value="ny">New York Time (GMT-5)</option>
-                        <option value="la">Los Angeles Time (GMT-8)</option>
+                      <label className="timezone-label">{texts.gmts}</label>
+                      <select
+                        className="timezone-select"
+                        value={timezone}
+                        onChange={(e) => setTimezone(e.target.value)}
+                      >
+                        <option value="America/Mexico_City">Mexico (GMT-6)</option>
+                        <option value="America/Guayaquil">Ecuador (GMT-5)</option>
+                        <option value="America/New_York">New York (GMT-5)</option>
+                        <option value="America/Los_Angeles">Los Angeles (GMT-8)</option>
+                        <option value="Europe/Madrid">España (GMT+1)</option>
+                        <option value="America/Bogota">Colombia (GMT-5)</option>
+                        <option value="America/Lima">Perú (GMT-5)</option>
+                        <option value="America/Santiago">Chile (GMT-4)</option>
                       </select>
                     </div>
                   </div>
 
                   <div className="time-slots">
-                    {availableTimes.map((time) => (
+                    {availableTimes.map((timeSlot) => (
                       <button
-                        key={time}
-                        onClick={() => handleTimeSelect(time)}
-                        className={`time-slot ${selectedTime === time ? "selected" : ""}`}
+                        key={timeSlot.baseTime}
+                        onClick={() => handleTimeSelect(timeSlot.baseTime)}
+                        className={`time-slot ${selectedTime === timeSlot.baseTime ? "selected" : ""}`}
                       >
-                        {time}
+                        {timeSlot.displayTime}
                       </button>
                     ))}
                   </div>
@@ -246,7 +311,7 @@ export function Booking() {
                 <div className="next-button-container">
                   {selectedTime && (
                     <button onClick={handleNext} className="btn btn-primary fade-in">
-                      Siguiente
+                      {texts.button1}
                       <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
@@ -257,20 +322,20 @@ export function Booking() {
             ) : (
               <div className="fade-in">
                 <div style={{ marginBottom: "1.5rem" }}>
-                  <h3 className="step-title">Ingresa tus datos</h3>
+                  <h3 className="step-title">{texts.fromTitle}</h3>
                   <p className="step-subtitle">
-                    Cuéntanos un poco sobre ti y tu proyecto.
+                    {texts.fromSubTitle}
                   </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="booking-form">
                   <div className="form-group">
-                    <label className="form-label">Nombre Completo *</label>
+                    <label className="form-label">{texts.data1}</label>
                     <input
                       required
                       type="text"
                       className="form-input"
-                      placeholder="Luis Mayorga"
+                      placeholder={texts.name}
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -279,12 +344,12 @@ export function Booking() {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Correo Electrónico *</label>
+                    <label className="form-label">{texts.data2}</label>
                     <input
                       required
                       type="email"
                       className="form-input"
-                      placeholder="tu-correo@example.com"
+                      placeholder={texts.descriptionData2}
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -293,7 +358,7 @@ export function Booking() {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Número de Teléfono</label>
+                    <label className="form-label">{texts.data3}</label>
                     <input
                       type="tel"
                       className="form-input"
@@ -306,11 +371,11 @@ export function Booking() {
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label">Descripción del Proyecto *</label>
+                    <label className="form-label">{texts.data4}</label>
                     <textarea
                       required
                       className="form-textarea"
-                      placeholder="Breve descripción de lo que necesitas..."
+                      placeholder={texts.descriptiondata4}
                       value={formData.description}
                       onChange={(e) =>
                         setFormData({ ...formData, description: e.target.value })
@@ -332,13 +397,13 @@ export function Booking() {
                         <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                         </svg>
-                        Agregar invitados (opcional)
+                        {texts.plusGuest}
                       </button>
                     ) : (
                       <div className="guest-container fade-in">
                         <div className="guest-header">
                           <label className="guest-count">
-                            Invitados ({guests.length}/10)
+                            {texts.guest} ({guests.length}/10)
                           </label>
                           <button
                             type="button"
@@ -354,7 +419,7 @@ export function Booking() {
                           </button>
                         </div>
                         <p className="guest-info">
-                          Los invitados recibirán un correo con los detalles de la reunión.
+                          {texts.descriptionGuests}
                         </p>
 
                         <div className="guest-list">
@@ -363,7 +428,7 @@ export function Booking() {
                               <input
                                 type="email"
                                 className="form-input"
-                                placeholder={`invitado${index + 1}@example.com`}
+                                placeholder={`${texts.mailExample}${index + 1}@example.com`}
                                 value={guest}
                                 onChange={(e) =>
                                   handleGuestEmailChange(index, e.target.value)
@@ -391,15 +456,24 @@ export function Booking() {
                             <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
-                            Agregar otro invitado
+                            {texts.button2}
                           </button>
                         )}
                       </div>
                     )}
                   </div>
 
-                  <button type="submit" className="submit-button">
-                    Confirmar Llamada
+                  <button type="submit" className="submit-button" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <span className="submit-loading">
+                        <svg className="spinner" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="31.4 31.4" />
+                        </svg>
+                        {texts.sending || "Enviando..."}
+                      </span>
+                    ) : (
+                      texts.button3
+                    )}
                   </button>
                 </form>
               </div>
@@ -433,4 +507,117 @@ function addMinutes(timeStr: string, minutesToAdd: number): string {
     return timeStr;
   }
 }
+function createUTCDate(date: Date, time: string, sourceTimeZone: string) {
+  const parsed = parse12HourTime(time);
+  if (!parsed) {
+    return new Date(date).toISOString();
+  }
+
+  const utcDate = zonedTimeToUtc(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    parsed.hours24,
+    parsed.minutes,
+    sourceTimeZone
+  );
+
+  return utcDate.toISOString();
+}
+
+function convertTimeBetweenTimeZones(
+  time: string,
+  fromTimeZone: string,
+  toTimeZone: string,
+  referenceDate: Date
+): string {
+  const parsed = parse12HourTime(time);
+  if (!parsed) return time;
+
+  const utcDate = zonedTimeToUtc(
+    referenceDate.getFullYear(),
+    referenceDate.getMonth(),
+    referenceDate.getDate(),
+    parsed.hours24,
+    parsed.minutes,
+    fromTimeZone
+  );
+
+  return formatTimeInTimeZone(utcDate, toTimeZone);
+}
+
+function parse12HourTime(time: string): { hours24: number; minutes: number } | null {
+  const [timePart, period] = time.trim().toLowerCase().split(" ");
+  if (!timePart || !period) return null;
+
+  const [rawHours, rawMinutes] = timePart.split(":");
+  const hours = Number(rawHours);
+  const minutes = Number(rawMinutes);
+
+  if (Number.isNaN(hours) || Number.isNaN(minutes)) return null;
+
+  let hours24 = hours % 12;
+  if (period === "pm") hours24 += 12;
+
+  return { hours24, minutes };
+}
+
+function zonedTimeToUtc(
+  year: number,
+  month: number,
+  day: number,
+  hours: number,
+  minutes: number,
+  timeZone: string
+): Date {
+  const utcGuess = Date.UTC(year, month, day, hours, minutes, 0);
+  const firstOffset = getTimeZoneOffsetMinutes(new Date(utcGuess), timeZone);
+  const adjustedUtc = utcGuess - firstOffset * 60_000;
+  const secondOffset = getTimeZoneOffsetMinutes(new Date(adjustedUtc), timeZone);
+
+  return new Date(utcGuess - secondOffset * 60_000);
+}
+
+function getTimeZoneOffsetMinutes(date: Date, timeZone: string): number {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).formatToParts(date);
+
+  const values: Record<string, string> = {};
+  for (const part of parts) {
+    if (part.type !== "literal") {
+      values[part.type] = part.value;
+    }
+  }
+
+  const asUtc = Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    Number(values.hour),
+    Number(values.minute),
+    Number(values.second)
+  );
+
+  return (asUtc - date.getTime()) / 60_000;
+}
+
+function formatTimeInTimeZone(date: Date, timeZone: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })
+    .format(date)
+    .toLowerCase();
+}
+
 export default Booking;

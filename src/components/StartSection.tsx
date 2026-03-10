@@ -60,7 +60,7 @@ const StartSection = () => {
         >
           <a href="/booking" style={{ textDecoration: 'none' }}>
 
-          <button className="boton" onClick={() => console.log('Comenzar proyecto')}>
+          <button className= "cta-button" onClick={() => console.log('Comenzar proyecto')}>
             {texts.btn}
           </button>
           </a>

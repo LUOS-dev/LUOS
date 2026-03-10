@@ -1,13 +1,17 @@
 import React from "react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
-import { information } from "../i18n/AppInsights-data";
+import { getAppInsightsContent } from "../i18n/AppInsights-data";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../i18n/utils";
 import "../Styles/figma-theme.css";
 import "../Styles/appinsights.css";
 import "../Styles/components.css";
 
 export default function AppEmpower() {
+  const { lang } = useLanguage();
+  const { hero, information, cta } = getAppInsightsContent(lang);
+
   return (
     <div className="relative">
       {/* Hero Section - Figma Theme Gradient - Vibrant Red/Orange */}
@@ -23,17 +27,17 @@ export default function AppEmpower() {
         <div className="empower-container mx-auto px-6 py-16 relative z-10">
           <div className="text-center mb-16">
             <h1 className="text-6xl md:text-8xl mb-8 text-white font-bold" style={{textShadow: "0 2px 10px rgba(0,0,0,0.3)"}}>
-              INSIGHTS
+              {hero.title}
             </h1>
             <div className="max-w-5xl mx-auto">
               <p className="text-2xl md:text-3xl text-white leading-relaxed mb-8">
-                Obtenga información y optimice las operaciones
+                {hero.subtitle}
               </p>
               <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                Libere el poder de sus datos con información basada en IA. Aproveche la analítica avanzada para tomar decisiones más inteligentes, impulsar la innovación y obtener una ventaja competitiva
+                {hero.description}
               </p>
               <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-                Transforme sus datos en inteligencia práctica para impulsar su negocio.
+                {hero.caption}
               </p>
             </div>
           </div>
@@ -208,18 +212,18 @@ export default function AppEmpower() {
 
         <div className="empower-container mx-auto px-6 text-center relative z-10">
           <h3 className="text-5xl md:text-6xl mb-8 text-white font-bold" style={{textShadow: "0 2px 10px rgba(0,0,0,0.3)"}}>
-            ¿Listo para desbloquear sus datos?
+            {cta.title}
           </h3>
           <p className="text-2xl md:text-3xl text-white mb-12 max-w-4xl mx-auto leading-relaxed">
-            Transforme información en inteligencia accionable
+            {cta.subtitle}
           </p>
           <p className="text-xl md:text-2xl text-gray-200 mb-16 max-w-4xl mx-auto leading-relaxed">
-            Descubra patrones ocultos, prediga tendencias futuras y tome decisiones basadas en datos que impulsen su negocio hacia el éxito
+            {cta.description}
           </p>
           <a href="/booking" style={{ textDecoration: 'none' }}>
           <button className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 hover:from-orange-600 hover:via-pink-600 hover:to-purple-700 text-white px-12 md:px-24 py-6 rounded-3xl text-xl transition-all duration-300 transform hover:scale-110 shadow-xl min-w-[320px] inline-flex items-center justify-center tracking-wide">
             <span className="flex items-center gap-3">
-              Iniciar Análisis Inteligente
+              {cta.button}
             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>

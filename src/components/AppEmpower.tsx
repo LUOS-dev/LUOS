@@ -1,12 +1,16 @@
 import React from "react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
-import { information } from "../i18n/AppEmpower-data";
+import { getAppEmpowerContent } from "../i18n/AppEmpower-data";
 import { ArrowRight } from "lucide-react";
+import { useLanguage } from "../i18n/utils";
 import "../Styles/appempower.css";
 import "../Styles/components.css";
 
 export default function AppEmpower() {
+  const { lang } = useLanguage();
+  const { hero, information, cta } = getAppEmpowerContent(lang);
+
   return (
     <div className="relative">
       {/* Hero Section - Light gradient */}
@@ -22,14 +26,14 @@ export default function AppEmpower() {
         <div className="empower-container mx-auto px-6 py-16 relative z-10">
           <div className="text-center mb-16">
             <h1 className="text-6xl md:text-8xl mb-8 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 bg-clip-text text-transparent">
-              EMPOWER
+              {hero.title}
             </h1>
             <div className="max-w-5xl mx-auto">
               <p className="text-2xl md:text-3xl text-gray-700 leading-relaxed mb-8">
-                Mantenga su negocio a la vanguardia del cambiante mercado global.
+                {hero.subtitle}
               </p>
               <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-                Ayudamos a las empresas a identificar oportunidades de innovación y a encontrar la alternativa tecnológica adecuada para sus necesidades.
+                {hero.description}
               </p>
             </div>
           </div>
@@ -184,15 +188,15 @@ export default function AppEmpower() {
 
         <div className="empower-container mx-auto px-6 text-center relative z-10">
           <h3 className="text-5xl md:text-6xl mb-8 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-600 bg-clip-text text-transparent">
-            ¿Listo para empoderar su negocio?
+            {cta.title}
           </h3>
           <p className="text-2xl md:text-3xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed">
-            Transforme su empresa con soluciones innovadoras que la posicionarán como líder en el mercado global
+            {cta.description}
           </p>
            <a href="/booking" style={{ textDecoration: 'none' }}>
           <button className="bg-gradient-to-r from-green-500 via-pink-500 to-blue-500 hover:from-green-600 hover:via-pink-600 hover:to-blue-600 text-white px-12 py-6 rounded-2xl text-xl transition-all duration-300 transform hover:scale-105 shadow-xl">
             <span className="flex items-center gap-3">
-              Empezar Transformación
+              {cta.button}
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>

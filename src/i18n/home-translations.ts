@@ -1,4 +1,3 @@
-// src/i18n/translations.ts
 
 import { Title } from "@radix-ui/react-dialog";
 
@@ -26,12 +25,12 @@ export const navBarTexts = {
       },
       innovation: {
         title: "Innovación",
-        description: "R&D y tecnologías emergentes",
+        description: "Tecnologías emergentes",
       },
-      blog: {
+      /*blog: {
         title: "LUOS Blog",
         description: "Sitio informativo sobre el mundo tech",
-      },
+      },*/
       history: {
         title: "Nuestra Historia",
         description: "Conoce el viaje de LUOS y nuestro impacto en la industria",
@@ -61,12 +60,12 @@ export const navBarTexts = {
       },
       innovation: {
         title: "Innovation",
-        description: "R&D and emerging technologies",
+        description: "Emerging technologies",
       },
-      blog: {
+      /*blog: {
         title: "LUOS Blog",
         description: "Informative site about the tech world",
-      },
+      },*/
       history: {
         title: "Our Story",
         description: "Discover LUOS's journey and industry impact",
