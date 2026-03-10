@@ -79,11 +79,9 @@
     max-width: 100%;
   }
   
-  /* En móvil, a veces queda mejor el texto arriba o el águila más pequeña */
-  .eagle-wrapper {
-    max-width: 300px;
-    margin: 0 auto;
-    margin-left: -2rem;
+  /* Ocultar el águila en móvil */
+  .innovation-visual {
+    display: none;
   }
 }
 
