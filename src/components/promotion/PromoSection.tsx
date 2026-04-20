@@ -46,13 +46,13 @@ export function InventoryPromoSection() {
             </h1>
             
             <p className="promo-description">
-              <span className="promo-description-highlight">El nombre pro de la app</span> - 
+              <span className="promo-description-highlight">supply app</span> - 
               La solución completa para optimizar y automatizar el control de inventario de tu empresa
             </p>
 
             <div className="promo-buttons">
               <button className="promo-btn-primary">
-                Solicitar Demo Gratuita
+                Prueba Gratuita
                 <ArrowRight className="w-5 h-5" />
               </button>
               
